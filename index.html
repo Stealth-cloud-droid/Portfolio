@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al-Amin Olayinka — Frontend &amp; Blockchain Developer</title>
+<meta name="description" content="Portfolio of Al-Amin Olayinka — frontend and blockchain developer working across React/Next.js and Rust smart contracts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1220;
+    --bg-raise: rgba(255,255,255,0.02);
+    --text:#E7EAF0;
+    --text-muted:#9AA5B8;
+    --accent:#E8A33D;
+    --accent-2:#4FD1C5;
+    --line: rgba(231,234,240,0.12);
+    --line-strong: rgba(231,234,240,0.22);
+    --maxw: 760px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', system-ui, sans-serif;
+    font-weight:600;
+    margin:0;
+    line-height:1.15;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(11,18,32,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:60px;
+  }
+  .nav-name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:1rem;
+    text-decoration:none;
+    letter-spacing:0.01em;
+  }
+  .nav-links{
+    display:flex;
+    gap:28px;
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:var(--text-muted);
+    font-size:0.92rem;
+    transition:color 0.15s ease;
+  }
+  .nav-links a:hover{ color:var(--text); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 88px;
+    overflow:hidden;
+  }
+  .hero-graph{
+    position:absolute;
+    top:-40px;
+    right:-120px;
+    width:520px;
+    height:520px;
+    opacity:0.16;
+    pointer-events:none;
+  }
+  .hero-eyebrow{
+    color:var(--accent-2);
+    margin-bottom:18px;
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(2.1rem, 5vw, 3.1rem);
+    max-width:11ch;
+    opacity:0;
+    transform:translateY(14px);
+    animation:rise 0.7s ease forwards;
+  }
+  .hero p.lede{
+    margin-top:22px;
+    max-width:52ch;
+    color:var(--text-muted);
+    font-size:1.08rem;
+    opacity:0;
+    transform:translateY(14px);
+    animation:rise 0.7s ease forwards;
+    animation-delay:0.12s;
+  }
+  .hero-links{
+    margin-top:34px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:22px;
+    opacity:0;
+    transform:translateY(14px);
+    animation:rise 0.7s ease forwards;
+    animation-delay:0.22s;
+  }
+  .hero-links a{
+    text-decoration:none;
+    border-bottom:1px solid var(--line-strong);
+    padding-bottom:2px;
+    font-size:0.95rem;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .hero-links a:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+
+  @keyframes rise{
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  /* ---------- Section headers ---------- */
+  section{
+    padding:64px 0;
+    border-top:1px solid var(--line);
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:40px;
+    gap:16px;
+  }
+  .section-head h2{
+    font-size:1.5rem;
+  }
+  .section-head .count{
+    color:var(--text-muted);
+  }
+
+  /* ---------- Work list ---------- */
+  .work-item{
+    padding:34px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .work-item:first-child{ padding-top:0; }
+  .work-item:last-child{ border-bottom:none; padding-bottom:0; }
+
+  .work-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .work-title{
+    font-size:1.2rem;
+  }
+  .work-title a{
+    text-decoration:none;
+    color:var(--text);
+    background-image:linear-gradient(var(--accent), var(--accent));
+    background-repeat:no-repeat;
+    background-size:0% 1px;
+    background-position:0 100%;
+    transition:background-size 0.2s ease;
+  }
+  .work-title a:hover{
+    background-size:100% 1px;
+  }
+  .work-pr{
+    color:var(--text-muted);
+    white-space:nowrap;
+  }
+  .work-desc{
+    margin-top:12px;
+    color:var(--text-muted);
+    max-width:64ch;
+  }
+  .work-tags{
+    margin-top:16px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--accent-2);
+    border:1px solid rgba(79,209,197,0.35);
+    padding:3px 9px;
+    border-radius:3px;
+  }
+  .work-status{
+    margin-top:14px;
+    font-size:0.85rem;
+    color:var(--text-muted);
+  }
+  .work-status .dot{
+    display:inline-block;
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--accent);
+    margin-right:7px;
+  }
+
+  /* ---------- About ---------- */
+  .about-body p{
+    color:var(--text-muted);
+    max-width:64ch;
+  }
+  .about-body p + p{ margin-top:16px; }
+  .about-body strong{ color:var(--text); font-weight:500; }
+
+  .skills{
+    margin-top:36px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  @media (max-width:560px){
+    .skills{ grid-template-columns:1fr; }
+  }
+  .skill-group h3{
+    font-size:0.95rem;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:400;
+    color:var(--text-muted);
+    margin-bottom:10px;
+  }
+  .skill-group ul{
+    list-style:none;
+    margin:0; padding:0;
+    color:var(--text);
+    font-size:0.98rem;
+  }
+  .skill-group li{
+    padding:5px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .skill-group li:last-child{ border-bottom:none; }
+
+  /* ---------- Contact ---------- */
+  .contact h2{
+    font-size:1.9rem;
+    max-width:14ch;
+  }
+  .contact p{
+    margin-top:16px;
+    color:var(--text-muted);
+    max-width:52ch;
+  }
+  .contact-links{
+    margin-top:32px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .contact-links a{
+    text-decoration:none;
+    display:inline-flex;
+    align-items:baseline;
+    gap:10px;
+    width:fit-content;
+    font-size:1.05rem;
+    border-bottom:1px solid transparent;
+    transition:color 0.15s ease, border-color 0.15s ease;
+  }
+  .contact-links a:hover{
+    color:var(--accent);
+    border-color:var(--accent);
+  }
+  .contact-links .label{
+    color:var(--text-muted);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    min-width:64px;
+    display:inline-block;
+  }
+
+  footer{
+    padding:32px 0 56px;
+    color:var(--text-muted);
+    font-size:0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="nav-name" href="#top">Al-Amin Olayinka</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <svg class="hero-graph" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="#4FD1C5" stroke-width="1" fill="none">
+      <line x1="60" y1="80" x2="180" y2="40"/>
+      <line x1="180" y1="40" x2="300" y2="90"/>
+      <line x1="180" y1="40" x2="150" y2="170"/>
+      <line x1="60" y1="80" x2="150" y2="170"/>
+      <line x1="150" y1="170" x2="290" y2="210"/>
+      <line x1="300" y1="90" x2="290" y2="210"/>
+      <line x1="150" y1="170" x2="110" y2="300"/>
+      <line x1="290" y1="210" x2="240" y2="330"/>
+      <line x1="110" y1="300" x2="240" y2="330"/>
+    </g>
+    <g fill="#E8A33D">
+      <circle cx="60" cy="80" r="5"/>
+      <circle cx="180" cy="40" r="5"/>
+      <circle cx="300" cy="90" r="5"/>
+      <circle cx="150" cy="170" r="6"/>
+      <circle cx="290" cy="210" r="5"/>
+      <circle cx="110" cy="300" r="5"/>
+      <circle cx="240" cy="330" r="5"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <span class="hero-eyebrow mono">Frontend &amp; blockchain developer</span>
+    <h1>I build the interfaces, and the contracts underneath them.</h1>
+    <p class="lede">I work across React and Next.js on the frontend, and Rust and Soroban on the smart-contract side — mostly through open-source contributions on real, in-production Web3 and ed-tech projects.</p>
+    <div class="hero-links">
+      <a href="mailto:oduntanalamin@gmail.com">Email</a>
+      <a href="https://github.com/Stealth-cloud-droid" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/al-amin-olayinka-46b088325" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</header>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <span class="count mono">4 shipped contributions</span>
+    </div>
+
+    <div class="work-item">
+      <div class="work-top">
+        <h3 class="work-title"><a href="https://github.com/Samuel1-ona/Hunty-contract/pull/974" target="_blank" rel="noopener">Hunty-contract — input sanitization fix</a></h3>
+        <span class="work-pr mono">PR #974 · merged</span>
+      </div>
+      <p class="work-desc">Audited a Stellar/Soroban smart-contract codebase and found that the string-sanitization function checked byte length and UTF-8 validity, but never trimmed whitespace — meaning a hunt could be created with a title of nothing but spaces. Fixed the function to trim before the emptiness check, so a blank-looking title is correctly rejected, and added test coverage for both the empty and trimmed cases.</p>
+      <div class="work-tags">
+        <span class="tag">Rust</span>
+        <span class="tag">Soroban</span>
+        <span class="tag">Stellar</span>
+        <span class="tag">Security &amp; validation</span>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-top">
+        <h3 class="work-title"><a href="https://github.com/ScaffoldRust/SoroSwap-Integration/pull/23" target="_blank" rel="noopener">SoroSwap-Integration — PoweredByLanding component</a></h3>
+        <span class="work-pr mono">PR #23 · merged</span>
+      </div>
+      <p class="work-desc">Built a landing-page section for a Soroswap DeFi template directly from a Figma spec: a gradient hero band, a responsive three-column feature grid, and accessible, keyboard-focusable CTAs. Matched the design at four breakpoints from 360px to 1280px, with no TypeScript or console warnings.</p>
+      <div class="work-tags">
+        <span class="tag">Next.js</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Tailwind CSS</span>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-top">
+        <h3 class="work-title"><a href="https://github.com/AURORALAOrg/aurora-frontend" target="_blank" rel="noopener">Aurora — grammar foundations assessments</a></h3>
+        <span class="work-pr mono">PR #287 · merged</span>
+      </div>
+      <p class="work-desc">Designed and built five grammar assessments — present simple, question formation, sentence structure, past simple, and pronouns &amp; articles — for an AI-powered language-learning platform. Each assessment mixes recognition and production exercises, with distractors written to target specific, common learner errors.</p>
+      <div class="work-tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">Content design</span>
+        <span class="tag">Ed-tech</span>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-top">
+        <h3 class="work-title"><a href="https://github.com/SkillCert/skillcert-backend-server/pull/82" target="_blank" rel="noopener">SkillCert — unit tests for LessonsController</a></h3>
+        <span class="work-pr mono">PR #82 · merged</span>
+      </div>
+      <p class="work-desc">Wrote Jest unit tests for the LessonsController on a NestJS backend, mocking the service layer to keep tests isolated from business logic and the database. Covered both success and error scenarios for each controller endpoint, following the project's existing testing conventions.</p>
+      <div class="work-tags">
+        <span class="tag">TypeScript</span>
+        <span class="tag">NestJS</span>
+        <span class="tag">Jest</span>
+        <span class="tag">Testing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>About</h2>
+    </div>
+    <div class="about-body">
+      <p>I'm a developer working at the intersection of frontend engineering and blockchain — comfortable shipping a pixel-accurate UI in <strong>Next.js and Tailwind</strong> one week, and auditing a <strong>Rust smart contract</strong> for validation bugs the next.</p>
+      <p>Most of my recent work has come through open-source contribution programs like <strong>OnlyDust</strong> and the <strong>Stellar Wave Program</strong> — picking up real issues on active repositories, working within someone else's codebase and constraints, and getting reviewed and merged by maintainers I've never met. That's a different discipline from solo projects, and it's the one I've been deliberately building.</p>
+    </div>
+
+    <div class="skills">
+      <div class="skill-group">
+        <h3>smart-contracts/</h3>
+        <ul>
+          <li>Rust</li>
+          <li>Soroban</li>
+          <li>Stellar</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>frontend/</h3>
+        <ul>
+          <li>JavaScript / TypeScript</li>
+          <li>React / Next.js</li>
+          <li>Tailwind CSS</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>backend &amp; testing/</h3>
+        <ul>
+          <li>NestJS</li>
+          <li>Jest</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Let's work together.</h2>
+    <p>Open to frontend, full-stack, or smart-contract roles and freelance work. The fastest way to reach me is email.</p>
+    <div class="contact-links">
+      <a href="mailto:oduntanalamin@gmail.com"><span class="label">email</span> oduntanalamin@gmail.com</a>
+      <a href="https://github.com/Stealth-cloud-droid" target="_blank" rel="noopener"><span class="label">github</span> github.com/Stealth-cloud-droid</a>
+      <a href="https://www.linkedin.com/in/al-amin-olayinka-46b088325" target="_blank" rel="noopener"><span class="label">linkedin</span> in/al-amin-olayinka-46b088325</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © <span id="year"></span> Al-Amin Olayinka.
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
